@@ -1,0 +1,13 @@
+services:
+  skylinee-harness:
+    build: .
+    container_name: skylinee-harness
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - "127.0.0.1:8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - ./data:/data

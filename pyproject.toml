@@ -1,0 +1,43 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "coreys-harness"
+version = "0.1.0"
+description = "A local-first, OpenAI-compatible model-routing and governance harness."
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Corey Jarman" },
+]
+keywords = ["ai", "ollama", "open-webui", "routing", "local-llm"]
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "httpx>=0.27,<1",
+  "pydantic-settings>=2.5,<3",
+  "uvicorn[standard]>=0.30,<1",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8,<9",
+  "ruff>=0.8,<1",
+]
+
+[project.urls]
+Homepage = "https://github.com/cojarman3011/coreys-harness"
+Repository = "https://github.com/cojarman3011/coreys-harness"
+Issues = "https://github.com/cojarman3011/coreys-harness/issues"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/skylinee_harness"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
