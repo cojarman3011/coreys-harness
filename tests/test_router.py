@@ -38,6 +38,7 @@ def test_routes_general_prompt() -> None:
     )
     assert result.category == "general"
 
+
 def test_explicit_alias_beats_keywords() -> None:
     result = route_request(
         "skylinee-general",

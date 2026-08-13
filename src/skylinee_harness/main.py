@@ -4,7 +4,7 @@ import time
 import uuid
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
-from typing import Any
+from typing import Annotated, Any
 
 import httpx
 from fastapi import Depends, FastAPI, Header, HTTPException, Request, status
@@ -18,8 +18,8 @@ from .router import RouteDecision, route_request
 
 
 def require_api_key(
+    settings: Annotated[Settings, Depends(get_settings)],
     authorization: str | None = Header(default=None),
-    settings: Settings = Depends(get_settings),
 ) -> None:
     if not settings.api_key:
         return
@@ -53,19 +53,21 @@ async def healthz() -> dict[str, str]:
 
 
 @app.get("/v1/models", dependencies=[Depends(require_api_key)])
-async def list_models(settings: Settings = Depends(get_settings)) -> dict[str, Any]:
+async def list_models(settings: Annotated[Settings, Depends(get_settings)]) -> dict[str, Any]:
     names = ["skylinee-auto", "skylinee-general", "skylinee-code", "skylinee-security"]
     return {
         "object": "list",
         "data": [
-            {"id": name, "object": "model", "created": 0, "owned_by": "skylinee"}
-            for name in names
+            {"id": name, "object": "model", "created": 0, "owned_by": "skylinee"} for name in names
         ],
     }
 
 
 @app.post("/v1/routes/preview", dependencies=[Depends(require_api_key)])
-async def preview_route(request: Request, settings: Settings = Depends(get_settings)) -> dict[str, str]:
+async def preview_route(
+    request: Request,
+    settings: Annotated[Settings, Depends(get_settings)],
+) -> dict[str, str]:
     payload = await _read_chat_payload(request)
     decision = route_request(payload.get("model", "skylinee-auto"), payload["messages"], settings)
     return {
@@ -77,7 +79,10 @@ async def preview_route(request: Request, settings: Settings = Depends(get_setti
 
 
 @app.post("/v1/chat/completions", dependencies=[Depends(require_api_key)])
-async def chat_completions(request: Request, settings: Settings = Depends(get_settings)):
+async def chat_completions(
+    request: Request,
+    settings: Annotated[Settings, Depends(get_settings)],
+) -> JSONResponse | StreamingResponse:
     original_payload = await _read_chat_payload(request)
     request_id = f"skylinee-{uuid.uuid4()}"
     started = time.monotonic()

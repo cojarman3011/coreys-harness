@@ -3,7 +3,6 @@ from typing import Any
 
 from .config import Settings
 
-
 CODE_TERMS = {
     "bug",
     "code",
