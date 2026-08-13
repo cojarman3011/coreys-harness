@@ -82,7 +82,7 @@ async def preview_route(
 async def chat_completions(
     request: Request,
     settings: Annotated[Settings, Depends(get_settings)],
-) -> JSONResponse | StreamingResponse:
+):
     original_payload = await _read_chat_payload(request)
     request_id = f"skylinee-{uuid.uuid4()}"
     started = time.monotonic()
