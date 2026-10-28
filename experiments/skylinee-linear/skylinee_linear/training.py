@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .model import ModelError, release_policy
 
+
 def train_csv(path,target,features,no_intercept=False,ridge=0.,test_fraction=.2,seed=42):
     import numpy as np
     if not .1<=test_fraction<=.4 or not math.isfinite(ridge) or ridge<0:raise ModelError("Invalid split or ridge strength")

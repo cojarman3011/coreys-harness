@@ -6,6 +6,7 @@ import sys
 from .model import predict, read, validate, verify
 from .training import save_release, train_csv
 
+
 def main(argv=None):
     p=argparse.ArgumentParser(description="Skylinee Linear portable regression")
     sub=p.add_subparsers(dest="command",required=True)

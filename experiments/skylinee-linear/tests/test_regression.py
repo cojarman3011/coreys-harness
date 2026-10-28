@@ -7,6 +7,7 @@ from pathlib import Path
 from skylinee_linear.model import ModelError, predict, verify
 from skylinee_linear.training import save_release, train_csv
 
+
 class TestLinear(unittest.TestCase):
     def setUp(self):
         t=tempfile.TemporaryDirectory();self.addCleanup(t.cleanup)

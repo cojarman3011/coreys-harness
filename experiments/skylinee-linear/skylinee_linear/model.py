@@ -4,6 +4,7 @@ import json
 import math
 from pathlib import Path
 
+
 class ModelError(ValueError): pass
 
 def read(path):

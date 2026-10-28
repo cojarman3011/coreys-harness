@@ -4,6 +4,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from .model import ModelError, predict, read, validate, verify
 
+
 def serve(model_path,policy_path,host="127.0.0.1",port=5055):
     approved=verify(model_path,policy_path)
     model=validate(read(model_path))

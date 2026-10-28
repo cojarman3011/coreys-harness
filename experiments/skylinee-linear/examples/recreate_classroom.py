@@ -2,6 +2,7 @@
 import csv
 
 import numpy as np
+
 rs=np.random.RandomState(10)
 x=5*rs.rand(30);y=3*x-2+rs.randn(30)
 with open("classroom_30.csv","w",newline="") as f:
