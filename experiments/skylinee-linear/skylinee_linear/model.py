@@ -1,5 +1,7 @@
 """Portable prediction and independently pinned release verification (no pickle)."""
-import json,hashlib,math
+import hashlib
+import json
+import math
 from pathlib import Path
 
 class ModelError(ValueError): pass

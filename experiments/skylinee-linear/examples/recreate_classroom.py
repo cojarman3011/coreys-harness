@@ -1,5 +1,6 @@
 """Rebuild original seeded 30-point teaching dataset (not real-world observations)."""
 import csv
+
 import numpy as np
 rs=np.random.RandomState(10)
 x=5*rs.rand(30);y=3*x-2+rs.randn(30)

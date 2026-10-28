@@ -1,7 +1,11 @@
 """Numerical CSV regression, deterministic holdout, and release serialization."""
-import csv,json,math,random
+import csv
+import json
+import math
+import random
 from pathlib import Path
-from .model import ModelError,release_policy
+
+from .model import ModelError, release_policy
 
 def train_csv(path,target,features,no_intercept=False,ridge=0.,test_fraction=.2,seed=42):
     import numpy as np

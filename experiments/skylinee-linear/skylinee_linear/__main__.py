@@ -1,7 +1,10 @@
 """Skylinee Linear CLI: train, verify, predict, serve."""
-import argparse,json,sys
-from .model import ModelError,read,validate,verify,predict
-from .training import train_csv,save_release
+import argparse
+import json
+import sys
+
+from .model import predict, read, validate, verify
+from .training import save_release, train_csv
 
 def main(argv=None):
     p=argparse.ArgumentParser(description="Skylinee Linear portable regression")

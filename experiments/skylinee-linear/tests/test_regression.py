@@ -1,7 +1,11 @@
-import csv,json,tempfile,unittest
+import csv
+import json
+import tempfile
+import unittest
 from pathlib import Path
-from skylinee_linear.training import train_csv,save_release
-from skylinee_linear.model import predict,verify,ModelError
+
+from skylinee_linear.model import ModelError, predict, verify
+from skylinee_linear.training import save_release, train_csv
 
 class TestLinear(unittest.TestCase):
     def setUp(self):
@@ -18,10 +22,10 @@ class TestLinear(unittest.TestCase):
         m,a,b=self.fit();m["intercept"]=999;a.write_text(json.dumps(m))
         with self.assertRaisesRegex(ModelError,"digest"):verify(a,b)
     def test_bad_input(self):
-        m,a,b=self.fit()
+        m,_,_=self.fit()
         with self.assertRaises(ModelError):predict(m,{"x":"four"})
     def test_extrapolation(self):
-        m,a,b=self.fit();self.assertTrue(predict(m,{"x":-10})["outside_training_range"])
+        m,_,_=self.fit();self.assertTrue(predict(m,{"x":-10})["outside_training_range"])
     def test_zero_intercept_quality(self):
         a=train_csv(self.csv,"y",["x"]);b=train_csv(self.csv,"y",["x"],no_intercept=True)
         self.assertGreater(b["metrics"]["rmse"],a["metrics"]["rmse"])

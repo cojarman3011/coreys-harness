@@ -1,7 +1,8 @@
 """Local-only JSON inference API. Use an authenticated reverse proxy for remote access."""
 import json
-from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
-from .model import verify,read,validate,predict,ModelError
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+
+from .model import ModelError, predict, read, validate, verify
 
 def serve(model_path,policy_path,host="127.0.0.1",port=5055):
     approved=verify(model_path,policy_path)
