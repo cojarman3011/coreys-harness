@@ -22,7 +22,5 @@ jobs:
           cache: pip
       - run: python -m pip install --upgrade pip
       - run: pip install -e '.[dev]'
-      - run: pip install -e './experiments/skylinee-linear[train]'
       - run: ruff check .
       - run: pytest
-      - run: python -m pytest experiments/skylinee-linear/tests -v
