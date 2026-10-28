@@ -25,3 +25,4 @@ jobs:
       - run: pip install -e './experiments/skylinee-linear[train]'
       - run: ruff check .
       - run: pytest
+      - run: python -m pytest experiments/skylinee-linear/tests -v
